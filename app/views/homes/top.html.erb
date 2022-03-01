@@ -1,2 +1,8 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="row">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+    <h1 class="text-center text-dark">Welcome to <i class="fas fa-book-open"></i>Bookers !!</h1>
+    <p class="text-center text-dark">you can share and exchange your opinions, impressions, and emotions about various books!</p>
+    <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-block col-12 col-sm-8 mx-auto mt-3" %>
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-block col-12 col-sm-8 mx-auto mt-3" %>
+  </div>
+</div>
