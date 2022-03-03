@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto">
+  <% err_n = @user.errors.count %>
+  <% if err_n > 0 %>
+    <div class="error-title bg-danger text-white pl-2">
+      <%= err_n > 1 ? err_n.to_s + " errors" : "An error" %> occured when updating:
+    </div>
+    <div class="error-body border border-danger pt-2">
+      <ul>
+        <% @user.errors.full_messages.each do |e| %>
+          <li><%= e %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form_with model: @user, url: user_path, method: :patch do |f| %>
+    <div class="form-group">
+      <% error = @user.errors[:name].any? %>
+      <% className = error ? "text-danger" : "text-dark" %>
+      <h4 class="<%= className %>">Name</h4>
+      <%= f.text_field :name, placeholder: "名前",
+        class: (error ? "form-control is-invalid" : "form-control") %>
+    </div>
+    <div class="form-group">
+      <% error = @user.errors[:introduction].any? %>
+      <% className = error ? "text-danger" : "text-dark" %>
+      <h4 class="<%= className %>">Introduction</h4>
+      <%= f.text_field :introduction, placeholder: "自己紹介",
+        class: (error ? "form-control is-invalid" : "form-control") %>
+    </div>
+    <div class="form-group">
+      <% error = @user.errors[:profile_image].any? %>
+      <% className = error ? "text-danger" : "text-dark" %>
+      <h4 class="<%= className %>">Profile image</h4>
+      <%= image_tag @user.get_profile_image(100, 100) %>
+      <%= f.file_field :profile_image, placeholder: "プロフィール画像",
+        accept: "image/*",
+        class: (error ? "form-control is-invalid" : "form-control") %>
+    </div>
+    <div class="row">
+      <%= f.submit "Update profile", class: "btn btn-primary" %>
+      <%= link_to "Delete Account", user_path(@user),
+         method: :delete, "data-confirm" =>
+         "WARNING:\n\n" +
+         "You are about to delete your account and all of your books.\n" +
+         "Once they are deleted, None of them can be restored.\n\n" +
+         "Do you really want to Delete?", class: "btn btn-danger ml-auto" %>
+    </div>
+  <% end %>
+  </div>
+</div>

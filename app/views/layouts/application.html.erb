@@ -57,6 +57,11 @@
         <%= flash.now[:notice] %>
         <% end %>
       </p>
+      <p id="alert" class="text-danger">
+        <% if flash[:alert] != nil %>
+        <%= flash.now[:alert] %>
+        <% end %>
+      </p>
       <%= yield %>
     </main>
   </body>

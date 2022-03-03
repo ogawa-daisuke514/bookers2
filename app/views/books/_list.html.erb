@@ -1,23 +1,26 @@
-<table>
-  <thead>
-    <tr>
-      <th>By</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% books.each do |b| %>
-    <tr>
-      <td><%= image_tag b.user.get_profile_image(100, 100) %></td>
-      <td><%= b.title %></td>
-      <td><%= b.body %></td>
-      <% if b.user == current_user %>
-      <td>(edit)</td>
-      <td>(destroy)</td>
+<div class="col-12 col-md-8">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>By</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% books.each do |b| %>
+      <tr>
+        <td><%= image_tag b.user.get_profile_image(100, 100) %></td>
+        <td><%= b.title %></td>
+        <td><%= b.body %></td>
+        <% if b.user == current_user %>
+        <td><%= link_to "Edit", edit_book_path(b), class: "btn btn-success" %></td>
+        <td><%= link_to "Destroy", book_path(b), method: :delete,
+            "data-confirm" => "Are you sure to destroy [#{b.title}]?", class: "btn btn-danger" %></td>
+        <% end %>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
