@@ -47,6 +47,11 @@
             <% end %>
           </ul>
         </div>
+        <% if user_signed_in? %>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.get_profile_image(40, 40), class: "ml-4 rounded-circle" %>
+          <% end %>
+        <% end %>
       </div>
     </nav>
   </header>

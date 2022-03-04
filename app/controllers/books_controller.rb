@@ -26,7 +26,7 @@ class BooksController < ApplicationController
   def destroy
     book = Book.find(params[:id])
     if book.user != current_user
-      redirect_to books_path, error: "You can destroy only your books!"
+      redirect_to books_path, error: "You can destroy only your book!"
     end
     book.destroy
     redirect_to books_path

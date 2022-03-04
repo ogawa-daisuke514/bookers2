@@ -4,29 +4,29 @@
   <h3>Name</h3>
   <div><%= user.name %></div>
   <h3>Introduction</h3>
-  <% pr = user.introduction.present? %>
-  <% intro = pr ? user.introduction : "(No introduction)" %>
-  <% intro_class = pr ? "" : "font-italic text-secondary" %>
 
-  <div class="<%= intro_class %>"><%= intro %></div>
+  <div class="<%= user.get_introduction_class %>"><%= user.get_introduction %></div>
   <% if user == current_user %>
-    <%= link_to edit_user_path(user), class: "btn col-12 btn-outline-secondary" do %>
+    <%= link_to edit_user_path(user), class: "btn col-12 btn-outline-secondary mt-3" do %>
       <i class="fas fa-user-cog"></i>Edit your profile
     <% end %>
   <% end %>
 
-  <h2 class="mt-5">New Book</h2>
-  <%= form_with model: @book, url: books_path, method: :post do |f| %>
-    <% error = @book.errors[:title].any? %>
-    <% className = error ? "text-danger" : "text-dark" %>
-    <h4 class="<%= className %>">Title</h4>
-    <%= f.text_field :title, placeholder: "タイトル",
-      class: (error ? "form-control is-invalid" : "form-control") %>
-    <% error = @book.errors[:body].any? %>
-    <% className = error ? "text-danger" : "text-dark" %>
-    <h4 class="<%= className %>">Body</h4>
-    <%= f.text_area :body, placeholder: "本文",
-      class: (error ? "form-control is-invalid" : "form-control") %>
-    <%= f.submit "Create new Book", class: "btn btn-success btn-block mt-3" %>
-  <% end %>
+  <div class="mt-2">
+    <h2>New Book</h2>
+    <%= render "users/error", errors: @book.errors, operation: "creating book" %>
+    <%= form_with model: @book, url: books_path, method: :post do |f| %>
+      <% error = @book.errors[:title].any? %>
+      <% className = error ? "text-danger" : "text-dark" %>
+      <h4 class="<%= className %>">Title</h4>
+      <%= f.text_field :title, placeholder: "タイトル",
+        class: (error ? "form-control is-invalid" : "form-control") %>
+      <% error = @book.errors[:body].any? %>
+      <% className = error ? "text-danger" : "text-dark" %>
+      <h4 class="<%= className %>">Body</h4>
+      <%= f.text_area :body, placeholder: "本文",
+        class: (error ? "form-control is-invalid" : "form-control") %>
+      <%= f.submit "Create new Book", class: "btn btn-success btn-block mt-3" %>
+    <% end %>
+  </div>
 </div>

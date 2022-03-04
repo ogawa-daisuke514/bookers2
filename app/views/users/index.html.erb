@@ -1,2 +1,24 @@
-<h1>Users#index</h1>
-<%= render "user", user: current_user %>
+<div class="row">
+  <%= render "user", user: current_user %>
+  <div class="col-12 col-md-8">
+    <h2>All users</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Introduction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |u| %>
+        <tr>
+          <td><%= image_tag u.get_profile_image(100, 100) %></td>
+          <td><%= link_to u.name, user_path(u) %></td>
+          <td class="<%= u.get_introduction_class %>"><%= u.get_introduction %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

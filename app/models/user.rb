@@ -9,6 +9,31 @@ class User < ApplicationRecord
             length: { minimum: 2, maximum: 20}
   validates :introduction, length: { maximum: 50}
 
+
+  def get_placeholder(prop_name)
+    case prop_name
+    when :name then
+      "(2～20characters, must be present and uniquie)"
+    when :introduction then
+      "(～50characters)"
+    end
+  end
+
+  def get_introduction_class
+    introduction.present? ? "" : "text-secondary font-italic"
+  end
+  def get_introduction
+    introduction.present? ? introduction : "(No introduction)"
+  end
+
+  def get_form_title_class(prop_name)
+    errors[prop_name].any? ? "text-danger" : "text-dark"
+  end
+
+  def get_form_class(prop_name)
+    errors[prop_name].any? ? "form-control is-invalid" : "form-control"
+  end
+
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join("app/assets/images/no_image.jpg")

@@ -1,4 +1,5 @@
 <div class="col-12 col-md-8">
+  <h2><%= title %></h2>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -11,13 +12,19 @@
     <tbody>
       <% books.each do |b| %>
       <tr>
-        <td><%= image_tag b.user.get_profile_image(100, 100) %></td>
-        <td><%= b.title %></td>
+        <td>
+          <%= link_to user_path(b.user) do %>
+            <%= image_tag b.user.get_profile_image(100, 100) %>
+          <% end %>
+        </td>
+        <td><%= link_to b.title, book_path(b) %></td>
         <td><%= b.body %></td>
         <% if b.user == current_user %>
         <td><%= link_to "Edit", edit_book_path(b), class: "btn btn-success" %></td>
         <td><%= link_to "Destroy", book_path(b), method: :delete,
             "data-confirm" => "Are you sure to destroy [#{b.title}]?", class: "btn btn-danger" %></td>
+        <% else %>
+          <td colspan="2"></td>
         <% end %>
       </tr>
       <% end %>

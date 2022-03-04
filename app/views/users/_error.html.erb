@@ -1,0 +1,15 @@
+  <% err_n = errors.count %>
+  <% if err_n > 0 %>
+    <div class="">
+      <div class="error-title bg-danger text-white pl-2">
+        <%= err_n > 1 ? err_n.to_s + " errors" : "An error" %> occured when <%= operation %>
+      </div>
+      <div class="error-body border border-danger pt-2">
+        <ul>
+          <% errors.full_messages.each do |e| %>
+            <li><%= e %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
