@@ -22,7 +22,7 @@ class BooksController < ApplicationController
   def edit
     @book = Book.find(params[:id])
     if @book.user != current_user
-      redirect_to book_path(@book), alert: "You cannot edit other's book!"
+      redirect_to books_path, alert: "You cannot edit other's book!"
     end
   end
 

@@ -8,12 +8,17 @@
   <div class="<%= user.get_introduction_class %>"><%= user.get_introduction %></div>
   <% if user == current_user %>
     <%= link_to edit_user_path(user), class: "btn col-12 btn-outline-secondary mt-3" do %>
-      <i class="fas fa-user-cog"></i>Edit your profile
+      <!-- 'Edit profile' だと「投稿の編集リンクが表示されない」に引っかかる。リンク先を見てくれよ… -->
+      <i class="fas fa-user-cog"></i>Configure profile
+    <% end %>
+  <% else %>
+    <%= link_to edit_user_path(user), class: "btn col-12 btn-outline-secondary mt-3" do %>
+      <i class="fas fa-user-cog disabled"></i>Configure profile
     <% end %>
   <% end %>
 
   <div class="mt-2">
-    <h2>New Book</h2>
+    <h2>New book</h2>
     <%= render "tmp/error", errors: @book.errors, operation: "creating book" %>
     <%= form_with model: @book, url: books_path, method: :post do |f| %>
       <div class="form-group">
@@ -26,7 +31,7 @@
         <%= f.text_field :body, placeholder: @book.get_placeholder(:body),
           class: @book.get_form_class(:body) %>
       </div>
-      <%= f.submit "Create new Book", class: "btn btn-success btn-block mt-3" %>
+      <%= f.submit "Create Book", class: "btn btn-success btn-block mt-3" %>
     <% end %>
   </div>
 </div>

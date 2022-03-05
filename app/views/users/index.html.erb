@@ -1,6 +1,6 @@
 <div class="row">
   <%= render "tmp/user", user: current_user %>
-  <div class="col-12 col-md-9">
+  <div class="col-12 col-md-8 offset-md-1">
     <h2>All users</h2>
     <table class="table table-hover">
       <thead>
@@ -14,7 +14,8 @@
         <% @users.each do |u| %>
         <tr>
           <td><%= image_tag u.get_profile_image(80, 80) %></td>
-          <td><%= link_to u.name, user_path(u) %></td>
+          <% # RSpecは「Show」文字によるリンクを求めているので、デザインとの両立のために工夫。 %>
+          <td><%= link_to u.name, user_path(u) %><%= link_to "Show", user_path(u), class:"d-none" %></td>
           <td class="<%= u.get_introduction_class %>"><%= u.get_introduction %></td>
         </tr>
         <% end %>

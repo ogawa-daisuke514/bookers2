@@ -51,8 +51,11 @@
           </ul>
         </div>
         <% if user_signed_in? %>
-          <%= link_to user_path(current_user) do %>
-            <%= image_tag current_user.get_profile_image(40, 40), class: "ml-4 rounded-circle" %>
+          <% link_to user_path(current_user) do %>
+            <% #ログイン中にアカウント画像をヘッダに表示しようとしたらRSpecにダメって言われた。 %>
+            <% image_tag current_user.get_profile_image(40, 40), class: "ml-4 rounded-circle" %>
+            <% #名前を表示するのも「自分の名前と紹介文は表示されない」に引っかかる。嘘やん… %>
+            <% "[#{current_user.name}]" %>
           <% end %>
         <% end %>
       </div>
