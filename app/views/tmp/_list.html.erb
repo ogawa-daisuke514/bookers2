@@ -1,11 +1,11 @@
-<div class="col-12 col-md-8">
+<div class="col-12 col-md-9">
   <h2><%= title %></h2>
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>By</th>
         <th>Title</th>
-        <th>Body</th>
+        <th>Opinion</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -14,7 +14,7 @@
       <tr>
         <td>
           <%= link_to user_path(b.user) do %>
-            <%= image_tag b.user.get_profile_image(100, 100) %>
+            <%= image_tag b.user.get_profile_image(70, 70) %>
           <% end %>
         </td>
         <td><%= link_to b.title, book_path(b) %></td>

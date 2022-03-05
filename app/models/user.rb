@@ -16,6 +16,12 @@ class User < ApplicationRecord
       "(2～20characters, must be present and uniquie)"
     when :introduction then
       "(～50characters)"
+    when :email then
+      "(must be present and unique)"
+    when :password
+      "(6～128characters)"
+    else
+      ""
     end
   end
 
@@ -24,14 +30,6 @@ class User < ApplicationRecord
   end
   def get_introduction
     introduction.present? ? introduction : "(No introduction)"
-  end
-
-  def get_form_title_class(prop_name)
-    errors[prop_name].any? ? "text-danger" : "text-dark"
-  end
-
-  def get_form_class(prop_name)
-    errors[prop_name].any? ? "form-control is-invalid" : "form-control"
   end
 
   def get_profile_image(width, height)

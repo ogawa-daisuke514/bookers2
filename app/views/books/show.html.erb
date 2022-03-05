@@ -1,2 +1,33 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="row">
+  <%= render "tmp/user", user: current_user %>
+  <div class="col-12 col-md-9">
+    <h2>Book detail</h2>
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td>Title</td>
+          <td><%= @showing_book.title %></td>
+        </tr>
+        <tr>
+          <td>Opinion</td>
+          <td><%= @showing_book.body %></td>
+        </tr>
+        <tr>
+          <td>By</td>
+          <td>
+            <%= link_to user_path(@showing_book.user) do %>
+              <%= image_tag @showing_book.user.get_profile_image(100, 100) %>
+              <%= @showing_book.user.name %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <% if @showing_book.user == current_user %>
+    <%= link_to "Edit", edit_book_path(@showing_book), class: "btn btn-success" %>
+    <%= link_to "Destroy", book_path(@showing_book), method: :delete,
+        "data-confirm" => "Are you sure to destroy [#{@showing_book.title}]?", class: "btn btn-danger" %>
+    <% end %>
+    <%= link_to "Back", books_path %>
+  </div>
+</div>

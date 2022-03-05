@@ -30,10 +30,10 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user != current_user
-      redirect_to user_path(user), alert: "You connot delete other account!"
+      redirect_to user_path(user), alert: "You cannot delete other account!"
     end
     user.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: "Your account is successfully deleted. Goodbye!"
   end
 
   private
